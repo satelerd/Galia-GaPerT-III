@@ -1,0 +1,33 @@
+header {
+  text-align: center;
+}
+
+span {
+  font-size: 20px;
+}
+h4 {
+  font-size: 4vmin;
+}
+h5 {
+  font-size: 2.5vmin;
+}
+
+.Body {
+  display: grid;
+  justify-content: center;
+}
+
+.pasos, .tweetgen {
+  display: grid;
+
+  margin:2vh 0;
+  grid-gap: 30px;
+}
+
+.paso1 {
+  width: 100%;
+}
+
+.paso2 {
+  justify-content: center;
+}
