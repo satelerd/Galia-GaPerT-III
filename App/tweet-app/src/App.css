@@ -12,7 +12,7 @@ h4 {
   font-size: clamp( 10px, 6vw, 40px );
 }
 h5 {
-  font-size: clamp( 10px, 6vw, 20px );
+  font-size: clamp( 10px, 4vw, 20px );
 }
 
 .Body {
