@@ -1,8 +1,9 @@
 .card {
     z-index: 1;
-    width: 100%;
+    width: 90vw;
+    max-width:650px ;
     height: 100%;
-    
+
 
     background: rgba(0, 0, 0, 0);
     border-radius: 8px;

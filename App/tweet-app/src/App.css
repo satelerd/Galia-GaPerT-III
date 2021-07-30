@@ -5,11 +5,14 @@ header {
 span {
   font-size: 20px;
 }
+h1 {
+  font-size: clamp( 40px, 6vw, 70px );
+}
 h4 {
-  font-size: 4vmax;
+  font-size: clamp( 10px, 6vw, 40px );
 }
 h5 {
-  font-size: 2vmax;
+  font-size: clamp( 10px, 6vw, 20px );
 }
 
 .Body {
