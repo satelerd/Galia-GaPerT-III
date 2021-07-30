@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/Galia-GaPerT-III/static/css/main.969ceb4c.chunk.css",
+    "main.css": "/Galia-GaPerT-III/static/css/main.84e31313.chunk.css",
     "main.js": "/Galia-GaPerT-III/static/js/main.db537089.chunk.js",
     "main.js.map": "/Galia-GaPerT-III/static/js/main.db537089.chunk.js.map",
     "runtime-main.js": "/Galia-GaPerT-III/static/js/runtime-main.265bd849.js",
@@ -10,13 +10,13 @@
     "static/js/3.42154ad5.chunk.js": "/Galia-GaPerT-III/static/js/3.42154ad5.chunk.js",
     "static/js/3.42154ad5.chunk.js.map": "/Galia-GaPerT-III/static/js/3.42154ad5.chunk.js.map",
     "index.html": "/Galia-GaPerT-III/index.html",
-    "static/css/main.969ceb4c.chunk.css.map": "/Galia-GaPerT-III/static/css/main.969ceb4c.chunk.css.map",
+    "static/css/main.84e31313.chunk.css.map": "/Galia-GaPerT-III/static/css/main.84e31313.chunk.css.map",
     "static/js/2.f7ccce03.chunk.js.LICENSE.txt": "/Galia-GaPerT-III/static/js/2.f7ccce03.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.265bd849.js",
     "static/js/2.f7ccce03.chunk.js",
-    "static/css/main.969ceb4c.chunk.css",
+    "static/css/main.84e31313.chunk.css",
     "static/js/main.db537089.chunk.js"
   ]
 }
