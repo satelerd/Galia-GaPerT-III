@@ -1,9 +1,46 @@
+h4 {
+    font-size: clamp( 10px, 6vw, 40px );
+}
+h5 {
+  font-size: clamp( 10px, 4vw, 20px );
+}
+input{
+  
+  width: 70%;
+  font-size: clamp( 5px, 4vw, 20px );
+  border-radius: 8px;
+}
+button {
+    width: 28%;
+    font-size: clamp( 5px, 4vw, 18px );
+}
+button {
+    background-color: #008CBA; /* Green */
+    border: none;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    transition-duration: 0.4s;
+    cursor: pointer;
+  }
+button {
+    background-color: white; 
+    color: black; 
+    border: 2px solid #008CBA;
+    border-radius: 8px;
+  }
+  
+button:hover {
+    background-color: #008CBA;
+    color: white;
+  }
+
 .card {
     z-index: 1;
     width: 90vw;
     max-width:650px ;
     height: 100%;
-
 
     background: rgba(0, 0, 0, 0);
     border-radius: 8px;
@@ -12,14 +49,23 @@
 }
 
 .card-body {
-    margin: 2%;
+    margin: 3% 2%;
 }
 
 .card-title, .card-text{
-    margin:3%;
+    margin: 4% 3% 2% 3%;
 }
 
-input {
-    margin: 3%;
-    width: 50%;
+.card-bot {
+    display: flex;
+    margin: 4% 3% 2% 3%;
+    justify-items: end;
+    grid-gap: 3%;
+}
+
+.card-buttons {
+    display: flex;
+    justify-content: center;
+    grid-gap: 10%;
+
 }

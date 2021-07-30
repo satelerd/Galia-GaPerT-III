@@ -8,12 +8,7 @@ span {
 h1 {
   font-size: clamp( 40px, 6vw, 70px );
 }
-h4 {
-  font-size: clamp( 10px, 6vw, 40px );
-}
-h5 {
-  font-size: clamp( 10px, 4vw, 20px );
-}
+
 
 .Body {
   display: grid;
@@ -24,7 +19,7 @@ h5 {
 .pasos, .tweetgen {
   display: grid;
 
-  margin:2vh 0;
+  margin:2.3vh 0;
   grid-gap: 30px;
 }
 
