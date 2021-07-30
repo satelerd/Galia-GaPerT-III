@@ -10,12 +10,11 @@ input{
   font-size: clamp( 5px, 4vw, 20px );
   border-radius: 8px;
 }
+
 button {
     width: 28%;
-    font-size: clamp( 5px, 4vw, 18px );
-}
-button {
-    background-color: #008CBA; /* Green */
+    font-size: clamp( 4px, 3vw, 18px );
+    background-color: #008CBA;
     border: none;
     color: white;
     text-align: center;
@@ -49,16 +48,16 @@ button:hover {
 }
 
 .card-body {
-    margin: 3% 2%;
+    margin: 1% 2%;
 }
 
 .card-title, .card-text{
-    margin: 4% 3% 2% 3%;
+    margin: 2% 3%;
 }
 
 .card-bot {
     display: flex;
-    margin: 4% 3% 2% 3%;
+    margin: 2% 3%;
     justify-items: end;
     grid-gap: 3%;
 }
@@ -67,5 +66,5 @@ button:hover {
     display: flex;
     justify-content: center;
     grid-gap: 10%;
-
+    margin: 2% 3%;
 }

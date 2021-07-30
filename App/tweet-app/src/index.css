@@ -1,11 +1,11 @@
 .App {
-  font-family: 'Comfortaa';
+  font-family: 'Open Sans';
   margin-top: 20px;
 }
 
 body {
   margin: 0;
-  font-family: 'Comfortaa',-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+  font-family: 'Open Sans', 'Comfortaa',-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -13,7 +13,10 @@ body {
 }
 
 button {
-  font-family: 'Comfortaa';
+  font-family: 'Open Sans';
+}
+input {
+  font-family: 'Open Sans';
 }
 
 code {
