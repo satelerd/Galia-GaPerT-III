@@ -1,15 +1,77 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import './App.css';
 import Card from "./components/card/Card"
+import OpenAI from 'openai-api';
+
 
 
 function App() {
-  const [theme, setTheme] = useState();
+  const [theme, setTheme] = useState("");
+  const [galiaResponse, setGaliaResponse] = useState()
+  const [gptResponse, setGptResponse] = useState("")
+
+
+  async function ApiCall() {
+    // APICALL
+    const  OPENAI_API_KEY = "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"
+    const openai = new OpenAI(OPENAI_API_KEY);
+    
+    setGaliaResponse("CALMA")
+    setGptResponse (
+      await openai.complete({
+        engine: 'davinci',
+        prompt: "Galia es una filosofa reconocida a nivel mundial que busca la creatividad, la libre expresión y la buena música. Galia es bastante sarcástica, por lo que a veces responde de mala gana.\nEste modelo generara un Tweet de Galia según un tema a elección.\n\nTema: El ocio. \nTweet: Siento que a veces hago mucho por la gente y la humanidad. ¿Por qué no puedo estar un rato sin hacer nada?\n###\nTema: La música.\nTweet: La música crea mas simpatía que el sexo.\n###\nTema: Paises sub desarrollados.\nTweet: Los paises subdesarrollados deberian ser mas estrictos con la migracion.\n###\nTema: Los carros.\nTweet: Me gusta mucho andar en bicicleta, pero estoy en contra de querer cambiar el mundo por ese termino.\n###\nTema: Pornografia.\nTweet: Me gusta mucho mirar porno, pero siempre tengo que tener cuidado con la hora, para no dar una \"sorpresa\" a mi madre.\n###\nTema: La gente.\nTweet: La gente es una raza aislada, que se siente superior y que no tiene en cuenta el mundo que la rodea.\n###\nTema:",
+        maxTokens: 64,
+        temperature: 0.5,
+        topP: 1,
+        presencePenalty: 0,
+        frequencyPenalty: 0,
+        bestOf: 1,
+        n: 1,
+        stream: false,
+        stop: ["###", "testing"]
+      })
+    )
+    // return gptResponse.data.choices[0].text
+    // gptResponse.data.choices[0].text
+    
+  } 
+
+  useEffect(() => {
+    if(gptResponse === "" || gptResponse.data === undefined) {
+      setGaliaResponse("")
+    } else{
+      // Limpieza de texto
+      var cont = 0
+      var txt = gptResponse.data.choices[0].text
+      for(let i=0; i<txt.length; i++) {
+        if (txt[i] === ":") {
+          break
+        }
+        cont++
+      }
+      if (theme === "") {
+        setTheme("Tema: " + txt.slice(0, cont-6))
+        console.log(txt)
+        txt = txt.slice(cont+2,txt.length-1)
+        console.log(txt)
+      } else {}
+      
+
+
+      setGaliaResponse(txt)
+      
+    }
+    console.log();
+  }, [gptResponse])
+
 
   var title = "Elige el tema para el tweet"
   var note = "(Dejalo vacio para que Galia genere su propio tema)"
-  var posibleInput = [{html: <input placeholder="Ej: La humanidad" onChange={ event =>setTheme(event.target.value)}></input>}, {html: <div></div>}]
-  var buttons = {button: <button>Generar Tweet</button>, button1: <button>Twittear</button>, button2: <button>Generar de nuevo</button>}
+  var posibleInput = [{html: <input placeholder="Ej: La humanidad" onChange={ event => setTheme("Tema: " + event.target.value) }></input>}, {html: <div></div>}]
+  var buttons = {button: <button onClick={() => {ApiCall()}}>Generar Tweet</button>, button1: <button>Twittear</button>, button2: <button>Generar de nuevo</button>}
+
+
 
   return (
     <div className="App">
@@ -25,7 +87,8 @@ function App() {
         </div>
 
         <div className="tweetgen">
-          <Card title={"Tweet generado"} theme={theme} tweet={"Tweet:"} isinput={posibleInput[1].html} button1={buttons.button1} button2={buttons.button2}/>
+          {/* <ApiCall></ApiCall> */}
+          <Card title={"Tweet generado"} theme={theme} tweet={"Tweet:"} isinput={posibleInput[1].html} galia={galiaResponse} button1={buttons.button1} button2={buttons.button2}/>
         </div>
       </div>
     </div>

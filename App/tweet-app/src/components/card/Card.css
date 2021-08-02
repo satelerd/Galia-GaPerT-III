@@ -51,15 +51,23 @@ button:hover {
     margin: 1% 2%;
 }
 
-.card-title, .card-text{
+.card-title {
     margin: 2% 3%;
+}
+
+.card-text {
+  margin: 1% 3% 2%;
 }
 
 .card-bot {
     display: flex;
     margin: 2% 3%;
-    justify-items: end;
-    grid-gap: 3%;
+    justify-items: center;
+    grid-gap: 15%;
+}
+
+.card-res {
+  margin: 2% 3% 4%;
 }
 
 .card-buttons {
