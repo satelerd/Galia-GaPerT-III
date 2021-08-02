@@ -3,6 +3,12 @@ import './App.css';
 import Card from "./components/card/Card"
 import OpenAI from 'openai-api';
 
+// // agruega 1 al contador de visitas
+// var xhr = new XMLHttpRequest();
+// xhr.open("GET", "https://api.countapi.xyz/hit/satelerd.github.ioGalia-GaPerT-III/visitas");
+// console.log("visitas", xhr)
+// xhr.responseType = "json";
+// xhr.send();
 
 
 function App() {
@@ -13,8 +19,8 @@ function App() {
 
   async function ApiCall() {
     // APICALL
-    const  OPENAI_API_KEY = "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"
-    const openai = new OpenAI(OPENAI_API_KEY);
+    const  userHandler = process.env.REACT_APP_USER_HANDLER
+    const openai = new OpenAI(userHandler);
     
     setGaliaResponse("CALMA")
     setGptResponse (
