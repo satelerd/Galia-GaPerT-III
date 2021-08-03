@@ -5,9 +5,6 @@ h5 {
   font-size: clamp( 10px, 4vw, 20px );
   font-weight: normal;
 }
-span {
-  font-weight: bold;
-}
 
 input{
   
