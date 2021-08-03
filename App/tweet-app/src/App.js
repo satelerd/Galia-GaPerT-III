@@ -3,12 +3,12 @@ import './App.css';
 import Card from "./components/card/Card"
 import OpenAI from 'openai-api';
 
-// // agruega 1 al contador de visitas
-// var xhr = new XMLHttpRequest();
-// xhr.open("GET", "https://api.countapi.xyz/hit/satelerd.github.ioGalia-GaPerT-III/visitas");
-// console.log("visitas", xhr)
-// xhr.responseType = "json";
-// xhr.send();
+// agruega 1 al contador de visitas
+var xhr = new XMLHttpRequest();
+xhr.open("GET", "https://api.countapi.xyz/hit/satelerd.github.ioGalia-GaPerT-III/visitas");
+console.log("visitas", xhr)
+xhr.responseType = "json";
+xhr.send();
 
 
 function App() {
@@ -45,8 +45,12 @@ function App() {
         stop: ["###", "testing"]
       })
     )
-    // return gptResponse.data.choices[0].text
-    // gptResponse.data.choices[0].text
+    // agruega 1 al contador de generaciones
+    var xhr = new XMLHttpRequest();
+    xhr.open("GET", "https://api.countapi.xyz/hit/satelerd.github.ioGalia-GaPerT-III/generaciones");
+    console.log("generaciones", xhr)
+    xhr.responseType = "json";
+    xhr.send();
     
   } 
 
@@ -72,8 +76,6 @@ function App() {
         txt = txt.slice(1,txt.length)
       }
       
-
-
       setGaliaResponse(txt)
       
     }
@@ -84,7 +86,7 @@ function App() {
   var title = "Elige el tema para el tweet"
   var note = "(Dejalo vacio para que Galia genere su propio tema)"
   var posibleInput = [{html: <input placeholder="Ej: La humanidad" onChange={ event => setTheme("Tema: " + event.target.value) }></input>}, {html: <div></div>}]
-  var buttons = {button: <button onClick={() => {ApiCall()}}>Generar Tweet</button>, button1: <button>Twittear</button>, button2: <button>Generar de nuevo</button>}
+  var buttons = {button: <button className="bold" onClick={() => {ApiCall()}}>Generar Tweet</button>, button1: <button className="bold">Twittear</button>, button2: <button className="bold">Generar de nuevo</button>}
 
 
 

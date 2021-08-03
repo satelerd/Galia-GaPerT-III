@@ -8,12 +8,12 @@ function Card({title, note, theme, tweet, isinput, galia, button, button1, butto
         <div className="card">
             <div className="card-body text-center">
                 <h4 className="card-title">{title}</h4>
-                <h5 className="card-text">{note}</h5>
+                <h5 className="card-text">{note} {theme}</h5>
+                <h5 className="card-text bold"> <span>{galia}</span> </h5>
                 
 
                 <div className="card-res">
-                    <h5>{theme}</h5>
-                    <h5>{galia}</h5>
+                    
                 </div>
 
                 <div className="card-bot">

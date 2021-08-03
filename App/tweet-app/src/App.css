@@ -7,6 +7,7 @@ span {
 }
 h1 {
   font-size: clamp( 40px, 6vw, 70px );
+  margin: 2%
 }
 
 
@@ -29,4 +30,8 @@ h1 {
 
 .paso2 {
   justify-content: center;
+}
+
+.bold {
+  font-weight: bold;
 }
