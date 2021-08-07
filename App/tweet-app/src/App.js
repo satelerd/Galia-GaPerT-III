@@ -11,6 +11,7 @@ xhr.responseType = "json";
 xhr.send();
 
 
+
 function App() {
   const [theme, setTheme] = useState("");
   const [galiaResponse, setGaliaResponse] = useState()
