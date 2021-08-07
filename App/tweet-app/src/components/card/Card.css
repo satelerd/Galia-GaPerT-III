@@ -47,6 +47,8 @@ button:hover {
     border-radius: 8px;
     border: 1px solid #b1b3b6;
     box-shadow: 0px 0px 12px 0px rgb(168, 166, 166);
+    box-shadow: 0px 0px 6px 2px rgb(0,0,0,0.2);
+    /* box-shadow: rgb(103 107 129 / 25%) 1px 2px 4px 2px; */
 }
 
 .card-body {
