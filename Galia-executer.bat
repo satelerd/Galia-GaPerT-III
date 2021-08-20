@@ -5,6 +5,11 @@ ECHO Please Wait...
 ECHO ============================
 ECHO Python Tweet_Creation.py
 ECHO ============================
-python C:\Users\satel\OneDrive\Escritorio\Code\Galia-GaPerT-III\Tweet_Creation.py
+python C:\Users\satel\OneDrive\Escritorio\Code\Galia-GaPerT-III\Tweet-Creation\Tweet_Creation.py
+
+ECHO ============================
+ECHO Python Tweet_Creation.py 2
+ECHO ============================
+python C:\Users\satel\OneDrive\Escritorio\Code\Galia-GaPerT-III\Tweet-Creation\Tweet_Creation.py
 
 PAUSE
