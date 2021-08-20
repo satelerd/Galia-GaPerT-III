@@ -1,6 +1,6 @@
 # Galia-GaPerT-III
 
-Bot que usa GPT-3 para controlar la cuenta de Twitter de @Galia_III.
+Bot que usa GPT-3 para generar Tweets.
 
 Twitter de Galia: https://twitter.com/Galia_III
 
