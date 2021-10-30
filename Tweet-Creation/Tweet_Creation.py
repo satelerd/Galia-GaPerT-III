@@ -14,7 +14,7 @@ import os
 
 
 # API info
-with open(r"C:\Users\satel\OneDrive\Escritorio\Code\Galia-Auth\Auth.json") as f:
+with open(r"C:\Users\satel\OneDrive\code\Galia\Galia-Auth\Auth.json") as f:
     apis = json.load(f)
 
 #  Tweeter API Auth
@@ -44,7 +44,7 @@ final = ".\nTweet:"
 
 openai.api_key = apis["openai_api_key"]
 response = openai.Completion.create(
-    engine="curie",
+    engine="davinci",
     prompt=preset,
     temperature=0.75,
     max_tokens=75,

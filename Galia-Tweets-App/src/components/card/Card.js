@@ -2,7 +2,7 @@ import React from 'react'
 import './Card.css'
 
 
-function Card({title, note, theme, tweet, isinput, galia, button, button1, button2}) {
+function Card({ title, note, theme, tweet, isinput, galia, button, button1, button2 }) {
 
     return (
         <div className="card">
@@ -10,10 +10,10 @@ function Card({title, note, theme, tweet, isinput, galia, button, button1, butto
                 <h4 className="card-title">{title}</h4>
                 <h5 className="card-text">{note} {theme}</h5>
                 <h5 className="card-text bold"> <span>{galia}</span> </h5>
-                
+
 
                 <div className="card-res">
-                    
+
                 </div>
 
                 <div className="card-bot">
@@ -29,7 +29,7 @@ function Card({title, note, theme, tweet, isinput, galia, button, button1, butto
                 </div> */}
             </div>
         </div>
-    ) 
+    )
 }
 
 export default Card
