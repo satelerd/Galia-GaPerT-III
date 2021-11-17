@@ -2,12 +2,11 @@ import tweepy
 import openai
 import os
 
-# SELECCIONAR EL TEMA
-theme_selector = ""
+# SELECT THE THEME HERE
+theme_selector = ""  # Leave blank for automatic theme selection
 
 
 def gpt3_call(theme):
-    # Uso de GPT-3
     preset = (
         'Galia es una filosofa reconocida a nivel mundial que busca la creatividad, la libre expresión, el universo, el desarrollo humano, la antropología, distopias, Elon Musk, y música. Galia es bastante sarcástica, por lo que a veces responde de mala gana.\nEste modelo generara un Tweet de Galia según un tema a elección.\n\nTema: El ocio. \nTweet: Siento que a veces hago mucho por la gente y la humanidad. ¿Por qué no puedo estar un rato sin hacer nada?\n###\nTema: La música.\nTweet: La música crea mas simpatía que el sexo.\n###\nTema: Países sub desarrollados.\nTweet: Los países subdesarrollados deberían ser mas estrictos con la migración.\n###\nTema: Los carros.\nTweet: Me gusta mucho andar en bicicleta, pero estoy en contra de querer cambiar el mundo por ese termino.\n###\nTema: pornografía.\nTweet: me gusta mucho mirar porno, pero siempre tengo que tener cuidado con la hora, para no dar una "sorpresa" a mi madre.\n###\nTema: Caleidoscopio.\nTweet: Mi vida es un caleidoscopio de emociones que se traslapan en cada momento. \n###\nTema:'
         + theme
@@ -20,7 +19,7 @@ def gpt3_call(theme):
         engine="davinci",
         prompt=preset,
         temperature=0.75,
-        max_tokens=40,
+        max_tokens=50,
         top_p=1,
         frequency_penalty=0.2,
         presence_penalty=0.16,
@@ -28,7 +27,7 @@ def gpt3_call(theme):
     )
     text = response.choices[0].text
 
-    # Limpieza del texto
+    # Text cleaning
     cont = 0
     for letter in text:
         if letter == ":":

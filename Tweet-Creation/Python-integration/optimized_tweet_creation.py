@@ -1,17 +1,74 @@
-import os
+import tweepy
 import openai
+import os
 
-openai.api_key = os.getenv("OPENAI_API_KEY")
 
-restart_sequence = "\n###\nTema y Tweet:"
+def gpt3_call():
+    openai.api_key = os.getenv("OPENAI_API_KEY")
 
-response = openai.Completion.create(
-    engine="davinci",
-    prompt='Galia es una filosofa reconocida a nivel mundial que busca la creatividad, la libre expresión y la buena música. Galia es bastante sarcástica, por lo que a veces responde de mala gana.\nEste modelo hará 4 generaciones, cada una deberá tener un tema, luego un guion y por ultimo el Tweet en base al tema.\n\nTema y Tweet:\n1. La música - La música crea mas simpatía que el sexo\n2. Los autos - Me gusta mucho andar en bicicleta, pero estoy en contra de querer cambiar el mundo por ese termino\n3. El ocio - Siento que a veces hago mucho por la gente y la humanidad. ¿Por qué no puedo estar un rato sin hacer nada?\n4. Países sub desarrollados - Los países subdesarrollados deberían ser mas estrictos con la migración\n###\nTema y Tweet:\n1. pornografía - me gusta mucho mirar porno, pero siempre tengo que tener cuidado con la hora, para no dar una "sorpresa" a mi madre\n2. Caleidoscopio - Mi vida es un caleidoscopio de emociones que se traslapan en cada momento\n3. Ropa - A veces me gustaría vivir sin ropa, pero siempre hay un factor social que impide ese hecho\n4. Bio de Twitter - El que no tiene la suficiente creatividad para hacer una buena bio debería dejar de utilizar las redes sociales\n###\nTema y Tweet:',
-    temperature=0.82,
-    max_tokens=190,
-    top_p=1,
-    frequency_penalty=0,
-    presence_penalty=0,
-    stop=["###", "Tema y"],
-)
+    restart_sequence = "\n###\nTema y Tweet:"
+
+    response = openai.Completion.create(
+        engine="davinci",
+        prompt='Galia es una filosofa reconocida a nivel mundial que busca la creatividad, la libre expresión y la buena música. Galia es bastante sarcástica, por lo que a veces responde de mala gana.\nEste modelo hará 4 generaciones, cada una deberá tener un tema, luego un guion y por ultimo el Tweet en base al tema.\n\nTema y Tweet:\n1. La música - La música crea mas simpatía que el sexo\n2. Los autos - Me gusta mucho andar en bicicleta, pero estoy en contra de querer cambiar el mundo por ese termino\n3. El ocio - Siento que a veces hago mucho por la gente y la humanidad. ¿Por qué no puedo estar un rato sin hacer nada?\n4. Países sub desarrollados - Los países subdesarrollados deberían ser mas estrictos con la migración\n###\nTema y Tweet:\n1. pornografía - me gusta mucho mirar porno, pero siempre tengo que tener cuidado con la hora, para no dar una "sorpresa" a mi madre\n2. Caleidoscopio - Mi vida es un caleidoscopio de emociones que se traslapan en cada momento\n3. Ropa - A veces me gustaría vivir sin ropa, pero siempre hay un factor social que impide ese hecho\n4. Bio de Twitter - El que no tiene la suficiente creatividad para hacer una buena bio debería dejar de utilizar las redes sociales\n###\nTema y Tweet:',
+        temperature=0.82,
+        max_tokens=190,
+        top_p=1,
+        frequency_penalty=0,
+        presence_penalty=0,
+        stop=["###", "Tema y"],
+    )
+    text = response.choices[0].text
+
+    print(text)
+    print()
+    return text
+
+
+def text_cleaning(text):
+    # divide that text into 4 strings
+    for i, word in enumerate(text):
+        if word == "1" and text[i + 1] == ".":
+            start1 = i + 3
+            continue
+        elif word == "2" and text[i + 1] == ".":
+            start2 = i + 3
+            end1 = i - 1
+            continue
+        elif word == "3" and text[i + 1] == ".":
+            start3 = i + 3
+            end2 = i - 1
+            continue
+        elif word == "4" and text[i + 1] == ".":
+            start4 = i + 3
+            end3 = i - 1
+            continue
+
+    tweets = [
+        text[start1:end1].split(" - ")[1],
+        text[start2:end2].split(" - ")[1],
+        text[start3:end3].split(" - ")[1],
+        text[start4:].split(" - ")[1],
+    ]
+
+    return tweets
+
+
+def tweet(tweets):
+    #  Twitter API Auth
+    auth = tweepy.OAuthHandler(
+        os.getenv("TWITTER_API_KEY"), os.getenv("TWITTER_API_KEY_SECRET")
+    )
+    auth.set_access_token(os.getenv("TWITTER_TOKEN"), os.getenv("TWITTER_TOKEN_SECRET"))
+    oauth = auth
+    t_api = tweepy.API(oauth)
+
+    # Tweet
+    for tweet in tweets:
+        t_api.update_status(tweet)
+        print("Tweeted")
+
+
+response = gpt3_call()
+tweets = text_cleaning(response)
+tweet(tweets)
