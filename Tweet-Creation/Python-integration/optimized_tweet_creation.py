@@ -27,29 +27,24 @@ def gpt3_call():
 
 def text_cleaning(text):
     # divide that text into 4 strings
+    tweets_starts = []
+    tweets_ends = []
     for i, word in enumerate(text):
         if word == "1" and text[i + 1] == ".":
-            start1 = i + 3
-            continue
-        elif word == "2" and text[i + 1] == ".":
-            start2 = i + 3
-            end1 = i - 1
-            continue
-        elif word == "3" and text[i + 1] == ".":
-            start3 = i + 3
-            end2 = i - 1
-            continue
-        elif word == "4" and text[i + 1] == ".":
-            start4 = i + 3
-            end3 = i - 1
-            continue
+            tweets_starts.append(i + 3)
 
-    tweets = [
-        text[start1:end1].split(" - ")[1],
-        text[start2:end2].split(" - ")[1],
-        text[start3:end3].split(" - ")[1],
-        text[start4:].split(" - ")[1],
-    ]
+        elif (
+            (word == "2" and text[i + 1] == ".")
+            or (word == "3" and text[i + 1] == ".")
+            or (word == "4" and text[i + 1] == ".")
+        ):
+            tweets_starts.append(i + 3)
+            tweets_ends.append(i - 1)
+    tweets_ends.append(len(text))
+
+    tweets = []
+    for i in range(len(tweets_starts)):
+        tweets.append(text[tweets_starts[i] : tweets_ends[i]].split(" - ")[1])
 
     return tweets
 
