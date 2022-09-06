@@ -1,6 +1,10 @@
 import tweepy
 import openai
+from stability_sdk import client
+import stability_sdk.interfaces.gooseai.generation.generation_pb2 as generation
 import os
+import io
+from PIL import Image
 
 
 def gpt3_call():
@@ -49,6 +53,28 @@ def text_cleaning(text):
     return tweets
 
 
+def sd_call(tweets):
+    print(os.getenv("STABILITY_API_KEY"))
+    stability_api = client.StabilityInference(
+        key="sk-PKx2Fh0nJlsurlyJMOdFFjbvHYOMRPr9qtk2XCO7nsPBWsoj",
+        verbose=True,
+    )
+
+    cont = 0
+    for tweet in tweets:
+        answers = stability_api.generate(prompt=tweet)
+        
+        for rep in answers:
+            for artifact in rep.artifacts:
+                if artifact.finish_reason == generation.FILTER:
+                    print("Filtered")
+                if artifact.type == generation.ARTIFACT_IMAGE:
+                    img =  Image.open(io.BytesIO(artifact.binary))
+                    img.save(f"image{cont}.png")
+
+    return "img generated"
+
+
 def tweet(tweets):
     #  Twitter API Auth
     auth = tweepy.OAuthHandler(
@@ -64,6 +90,8 @@ def tweet(tweets):
         print("Tweeted")
 
 
-response = gpt3_call()
-tweets = text_cleaning(response)
-tweet(tweets)
+# response = gpt3_call()
+# tweets = text_cleaning(response)
+tweets = ["la tierra es como una manzana", "la sensacion del vertigo"]
+sd_call(tweets)
+# tweet(tweets)
