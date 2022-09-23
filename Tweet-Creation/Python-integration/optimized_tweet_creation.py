@@ -53,7 +53,7 @@ def text_cleaning(text):
         sections = text[tweets_starts[i] : tweets_ends[i]].split(" - ")
         tweets.append([sections[1], sections[2]])
 
-    return tweets[:2]
+    return tweets
 
 
 def sd_call(tweets):
@@ -92,12 +92,13 @@ def tweet(tweets):
     cont = 0
     for tweet in tweets:
         media = t_api.media_upload(f"image{cont}.png")
-        t_api.update_status(status=tweet, media_ids=[media.media_id])
+        t_api.update_status(status=tweet[0], media_ids=[media.media_id])
         cont += 1
         print("Tweeted")
 
 
-response = gpt3_call()
-tweets = text_cleaning(response)
-sd_call(tweets)
-tweet(tweets)
+if __name__ == "__main__":
+    response = gpt3_call()
+    tweets = text_cleaning(response)
+    sd_call(tweets)
+    tweet(tweets)
