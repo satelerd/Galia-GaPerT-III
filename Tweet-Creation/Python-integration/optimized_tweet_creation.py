@@ -65,7 +65,8 @@ def sd_call(tweets):
 
     cont = 0
     for tweet in tweets:
-        answers = stability_api.generate(prompt=tweet[1])
+        sd_prompt = "una pintura digital de " + tweet[1] + ". Arte digital"
+        answers = stability_api.generate(prompt=sd_prompt)
 
         for rep in answers:
             for artifact in rep.artifacts:
