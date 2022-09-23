@@ -1,3 +1,5 @@
+# coding=utf8
+
 import tweepy
 import openai
 from stability_sdk import client
@@ -48,7 +50,8 @@ def text_cleaning(text):
 
     tweets = []
     for i in range(len(tweets_starts)):
-        tweets.append(text[tweets_starts[i] : tweets_ends[i]].split(" - ")[1])
+        sections = text[tweets_starts[i] : tweets_ends[i]].split(" - ")
+        tweets.append([sections[1], sections[2]])
 
     return tweets[:2]
 
@@ -96,6 +99,5 @@ def tweet(tweets):
 
 response = gpt3_call()
 tweets = text_cleaning(response)
-# tweets = ["la tierra es como una manzana", "la sensacion del vertigo"]
-sd_call(tweets)
-tweet(tweets)
+# sd_call(tweets)
+# tweet(tweets)
