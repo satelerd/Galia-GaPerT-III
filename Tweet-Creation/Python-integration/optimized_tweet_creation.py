@@ -57,7 +57,7 @@ def text_cleaning(text):
 
 
 def sd_call(tweets):
-    print(os.getenv("STABILITY_API_KEY"))
+    # print(os.getenv("STABILITY_API_KEY"))
     stability_api = client.StabilityInference(
         key="sk-PKx2Fh0nJlsurlyJMOdFFjbvHYOMRPr9qtk2XCO7nsPBWsoj",
         verbose=True,
@@ -65,7 +65,7 @@ def sd_call(tweets):
 
     cont = 0
     for tweet in tweets:
-        answers = stability_api.generate(prompt=tweet)
+        answers = stability_api.generate(prompt=tweet[1])
 
         for rep in answers:
             for artifact in rep.artifacts:
@@ -99,5 +99,5 @@ def tweet(tweets):
 
 response = gpt3_call()
 tweets = text_cleaning(response)
-# sd_call(tweets)
-# tweet(tweets)
+sd_call(tweets)
+tweet(tweets)
