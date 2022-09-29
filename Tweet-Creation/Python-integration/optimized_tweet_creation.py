@@ -74,7 +74,9 @@ def sd_call(tweets):
                     print("Filtered")
                 if artifact.type == generation.ARTIFACT_IMAGE:
                     img = Image.open(io.BytesIO(artifact.binary))
-                    img.save(f"image{cont}.png")
+                    img.save(
+                        f"C:/Users/satel/OneDrive/code/Galia/Galia-GaPerT-III/imgs/image{cont}.png"
+                    )
                     cont += 1
 
     return "img generated"
@@ -92,7 +94,9 @@ def tweet(tweets):
     # Tweet
     cont = 0
     for tweet in tweets:
-        media = t_api.media_upload(f"image{cont}.png")
+        media = t_api.media_upload(
+            f"C:/Users/satel/OneDrive/code/Galia/Galia-GaPerT-III/imgs/image{cont}.png"
+        )
         t_api.update_status(status=tweet[0], media_ids=[media.media_id])
         cont += 1
         print("Tweeted")
