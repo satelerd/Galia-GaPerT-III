@@ -79,6 +79,8 @@ def sd_call(tweets):
                     )
                     cont += 1
 
+    print("Generacion de Stable Diffusion exitosa")
+    print()
     return "img generated"
 
 
