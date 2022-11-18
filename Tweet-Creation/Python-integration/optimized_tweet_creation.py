@@ -96,10 +96,10 @@ def tweet(tweets):
     # Tweet
     cont = 0
     for tweet in tweets:
-        media = t_api.media_upload(
-            f"C:/Users/satel/OneDrive/code/Galia/Galia-GaPerT-III/imgs/image{cont}.png"
-        )
-        t_api.update_status(status=tweet[0], media_ids=[media.media_id])
+        # media = t_api.media_upload(
+        #     f"C:/Users/satel/OneDrive/code/Galia/Galia-GaPerT-III/imgs/image{cont}.png"
+        # )
+        t_api.update_status(status=tweet[0])  # , media_ids=[media.media_id])
         cont += 1
         print("Tweeted")
 
@@ -107,5 +107,5 @@ def tweet(tweets):
 if __name__ == "__main__":
     response = gpt3_call()
     tweets = text_cleaning(response)
-    sd_call(tweets)
+    # sd_call(tweets)
     tweet(tweets)
