@@ -61,7 +61,7 @@ def text_cleaning(text):
 def sd_call(tweets):
     # print(os.getenv("STABILITY_API_KEY"))
     stability_api = client.StabilityInference(
-        key="sk-PKx2Fh0nJlsurlyJMOdFFjbvHYOMRPr9qtk2XCO7nsPBWsoj",
+        key="", #env
         verbose=True,
     )
 
