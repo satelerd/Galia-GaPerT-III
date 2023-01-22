@@ -64,7 +64,6 @@ def sd_call(tweets):
     print(env_key)
     stability_api = client.StabilityInference(
         key=env_key,
-        # key="sk-UvZp7ILjuiB8boOQPsZ6cAvthw3vZsDWFalw364OkMH8AKxo",
         verbose=True,
     )
 
