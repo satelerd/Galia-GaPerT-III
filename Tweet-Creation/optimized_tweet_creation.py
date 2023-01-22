@@ -1,12 +1,13 @@
 # coding=utf8
 
-import tweepy
-import openai
-from stability_sdk import client
-import stability_sdk.interfaces.gooseai.generation.generation_pb2 as generation
 import os
 import io
+import tweepy
+import openai
 from PIL import Image
+from stability_sdk import client
+import stability_sdk.interfaces.gooseai.generation.generation_pb2 as generation
+
 
 def gpt3_call():
     openai.api_key = os.getenv("OPENAI_API_KEY")
@@ -30,10 +31,9 @@ def gpt3_call():
 
 
 def text_cleaning(text):
-    # divide that text into 4 strings
     tweets_starts = []
     tweets_ends = []
-    for i, word in enumerate(text):
+    for i, word in enumerate(text):     # divide that text into 4 strings 
         if word == "1" and text[i + 1] == ".":
             tweets_starts.append(i + 3)
 
@@ -44,6 +44,7 @@ def text_cleaning(text):
         ):
             tweets_starts.append(i + 3)
             tweets_ends.append(i - 1)
+
     tweets_ends.append(len(text))
 
     tweets = []
@@ -59,9 +60,7 @@ def text_cleaning(text):
 
 
 def sd_call(tweets):
-    # print(os.getenv("STABILITY_API_KEY"))
     env_key = os.getenv("STABILITY_KEY")
-    print(env_key)
     stability_api = client.StabilityInference(
         key=env_key,
         verbose=True,
@@ -69,11 +68,8 @@ def sd_call(tweets):
 
     cont = 0
     for tweet in tweets:
-        print(tweet)
         sd_prompt = "Una pintura de " + tweet[1] + ". Arte digital"
-        print(sd_prompt)
         answers = stability_api.generate(prompt=sd_prompt, samples=1)
-        print(answers)
 
         for rep in answers:
             for artifact in rep.artifacts:
@@ -103,10 +99,14 @@ def tweet(tweets):
     # Tweet
     cont = 0
     for tweet in tweets:
-        # media = t_api.media_upload(
-        #     f"C:/Users/satel/OneDrive/code/Galia/Galia-GaPerT-III/imgs/image{cont}.png"
-        # )
-        t_api.update_status(status=tweet[0])  # , media_ids=[media.media_id])
+        try:
+                media = t_api.media_upload(
+                    f"./Tweet-Creation/imgs/image{cont}.png"
+                )
+                t_api.update_status(status=tweet[0], media_ids=[media.media_id])
+        except:
+            t_api.update_status(status=tweet[0])
+        
         cont += 1
         print("Tweeted")
 
@@ -115,4 +115,4 @@ if __name__ == "__main__":
     response = gpt3_call()
     tweets = text_cleaning(response)
     sd_call(tweets)
-    # tweet(tweets)
+    tweet(tweets)
