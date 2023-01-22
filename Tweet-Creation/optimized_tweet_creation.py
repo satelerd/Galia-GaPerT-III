@@ -9,6 +9,8 @@ from googletrans import Translator
 from stability_sdk import client
 import stability_sdk.interfaces.gooseai.generation.generation_pb2 as generation
 
+# move to this dir location: C:\Users\satel\codee\Galia-GaPerT-III\
+os.chdir("C:\\Users\\satel\\codee\\Galia-GaPerT-III\\")
 
 
 def gpt3_call():
