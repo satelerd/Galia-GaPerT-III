@@ -1,12 +1,14 @@
 # coding=utf8
 
-import tweepy
-import openai
-from stability_sdk import client
-import stability_sdk.interfaces.gooseai.generation.generation_pb2 as generation
 import os
 import io
+import tweepy
+import openai
 from PIL import Image
+from googletrans import Translator
+from stability_sdk import client
+import stability_sdk.interfaces.gooseai.generation.generation_pb2 as generation
+
 
 
 def gpt3_call():
@@ -31,10 +33,9 @@ def gpt3_call():
 
 
 def text_cleaning(text):
-    # divide that text into 4 strings
     tweets_starts = []
     tweets_ends = []
-    for i, word in enumerate(text):
+    for i, word in enumerate(text):     # divide that text into 4 strings 
         if word == "1" and text[i + 1] == ".":
             tweets_starts.append(i + 3)
 
@@ -45,6 +46,7 @@ def text_cleaning(text):
         ):
             tweets_starts.append(i + 3)
             tweets_ends.append(i - 1)
+
     tweets_ends.append(len(text))
 
     tweets = []
@@ -60,19 +62,20 @@ def text_cleaning(text):
 
 
 def sd_call(tweets):
-    # print(os.getenv("STABILITY_API_KEY"))
-    env_key = os.getenv("Dreamstudio_API_Galia")
+    translator = Translator()
+
+    env_key = os.getenv("STABILITY_KEY")
     stability_api = client.StabilityInference(
-        # key=env_key,
-        key="sk-UvZp7ILjuiB8boOQPsZ6cAvthw3vZsDWFalw364OkMH8AKxo",
+        key=env_key,
         verbose=True,
+        engine="stable-diffusion-v1-5",
     )
 
     cont = 0
     for tweet in tweets:
-        sd_prompt = "una pintura digital de " + tweet[1] + ". Arte digital"
-        answers = stability_api.generate(prompt=sd_prompt)
-        print(answers)
+        tweet = translator.translate(tweet[1], src="es", dest="en").text
+        sd_prompt = "A highly detailed matte painting titled: " + tweet + ". Volumetric lighting, 4 k resolution, masterpiece"
+        answers = stability_api.generate(prompt=sd_prompt, samples=1)
 
         for rep in answers:
             for artifact in rep.artifacts:
@@ -81,7 +84,7 @@ def sd_call(tweets):
                 if artifact.type == generation.ARTIFACT_IMAGE:
                     img = Image.open(io.BytesIO(artifact.binary))
                     img.save(
-                        f"./imgs/image{cont}.png"
+                        f"./Tweet-Creation/imgs/image{cont}.png"
                     )
                     cont += 1
 
@@ -102,10 +105,14 @@ def tweet(tweets):
     # Tweet
     cont = 0
     for tweet in tweets:
-        # media = t_api.media_upload(
-        #     f"C:/Users/satel/OneDrive/code/Galia/Galia-GaPerT-III/imgs/image{cont}.png"
-        # )
-        t_api.update_status(status=tweet[0])  # , media_ids=[media.media_id])
+        try:
+                media = t_api.media_upload(
+                    f"./Tweet-Creation/imgs/image{cont}.png"
+                )
+                t_api.update_status(status=tweet[0], media_ids=[media.media_id])
+        except:
+            t_api.update_status(status=tweet[0])
+        
         cont += 1
         print("Tweeted")
 
@@ -113,5 +120,5 @@ def tweet(tweets):
 if __name__ == "__main__":
     response = gpt3_call()
     tweets = text_cleaning(response)
-    # sd_call(tweets)
+    sd_call(tweets)
     tweet(tweets)
