@@ -8,7 +8,6 @@ import os
 import io
 from PIL import Image
 
-
 def gpt3_call():
     openai.api_key = os.getenv("OPENAI_API_KEY")
 
@@ -61,16 +60,20 @@ def text_cleaning(text):
 
 def sd_call(tweets):
     # print(os.getenv("STABILITY_API_KEY"))
-    env_key = os.getenv("Dreamstudio_API_Galia")
+    env_key = os.getenv("STABILITY_KEY")
+    print(env_key)
     stability_api = client.StabilityInference(
         key=env_key,
+        # key="sk-UvZp7ILjuiB8boOQPsZ6cAvthw3vZsDWFalw364OkMH8AKxo",
         verbose=True,
     )
 
     cont = 0
     for tweet in tweets:
-        sd_prompt = "una pintura digital de " + tweet[1] + ". Arte digital"
-        answers = stability_api.generate(prompt=sd_prompt)
+        print(tweet)
+        sd_prompt = "Una pintura digital de " + tweet[1] + ". Arte digital"
+        print(sd_prompt)
+        answers = stability_api.generate(prompt=sd_prompt, samples=1)
         print(answers)
 
         for rep in answers:
@@ -80,7 +83,7 @@ def sd_call(tweets):
                 if artifact.type == generation.ARTIFACT_IMAGE:
                     img = Image.open(io.BytesIO(artifact.binary))
                     img.save(
-                        f"./imgs/image{cont}.png"
+                        f"./Tweet-Creation/imgs/image{cont}.png"
                     )
                     cont += 1
 
@@ -112,5 +115,5 @@ def tweet(tweets):
 if __name__ == "__main__":
     response = gpt3_call()
     tweets = text_cleaning(response)
-    # sd_call(tweets)
-    tweet(tweets)
+    sd_call(tweets)
+    # tweet(tweets)
