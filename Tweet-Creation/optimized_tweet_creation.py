@@ -107,10 +107,12 @@ def tweet(tweets):
     # Tweet
     cont = 0
     for tweet in tweets:
+        alt_text = tweet[1]
         try:
                 media = t_api.media_upload(
-                    f"./Tweet-Creation/imgs/image{cont}.png"
+                    f"./Tweet-Creation/imgs/image{cont}.png", media_description=alt_text
                 )
+                t_api.create_media_metadata(media.media_id, alt_text)
                 t_api.update_status(status=tweet[0], media_ids=[media.media_id])
         except:
             t_api.update_status(status=tweet[0])
