@@ -33,6 +33,19 @@ def gpt3_call():
     print()
     return text
 
+def chatgpt_call():
+
+    with open("galia-chat-prompt.txt", "r") as file:
+        prompt = file.read()
+
+    openai.api_key = os.getenv("OPENAI_API_KEY")
+
+    openai.ChatCompletion.create(
+        model="gpt-3.5-turbo",
+        messages=prompt
+    )
+
+
 
 def text_cleaning(text):
     tweets_starts = []
