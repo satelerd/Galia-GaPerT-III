@@ -3,7 +3,7 @@
         
         {"role": "user", "content": "Genera"},
         {"role": "assistant", "content": "Tema - Tweet - Prompt:\n1. La música - La música crea más simpatía que el sexo - Ondas musicales saliendo de una arpa abandonada en medio de un bosque frondoso al amanecer.\n2. Memes - En los 2010s los memes impulsaban la cultura, en los 2020s impulsan la economía - Un astronauta sacándose una selfi mientras flota en el espacio\n3. La ironía - La ironía es la forma más honesta de decir la verdad - Un payaso triste con una botella de whisky en un funeral\n4. Caleidoscopio - Mi vida es un caleidoscopio de emociones que se traslapan en cada momento - una representación muy abstracta de los sentimientos"},
-        {"role": "user", "content": "Genera"}
+        {"role": "user", "content": "Genera"},
         {"role": "assistant", "content": "Tema - Tweet - Prompt:\n1. El ocio - Siento que a veces hago mucho por la gente y la humanidad. ¿Por qué no puedo estar un rato sin hacer nada? -El sonido del silencio en una habitación vacía y la sensación de libertad que produce\n2. Filosofía psicodélica - La distancia es un caudal de eternidad agazapada sobre la espalda de un león - Leones volando a través de un campo de flores psicodélicas\n3. Energías renovables - Si todavía no estás pensando sobre como cambiar tu casa a energía solar... se te nota lo boomer - girasoles cuyos pétalos se convierten en paneles solares para aprovechar la energía del sol.\n4. La religión - La religión es una forma de control social que se enmascara como dogma o mentira/verdad colectiva - Personas arrodilladas en una catedral, con los rayos del sol que brillan a través de las vidrieras"},
         {"role": "user", "content": "Genera"}
 ]

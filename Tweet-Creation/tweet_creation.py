@@ -34,16 +34,30 @@ def gpt3_call():
     return text
 
 def chatgpt_call():
-
-    with open("galia-chat-prompt.txt", "r") as file:
+    with open("./Tweet-Creation/galia-chat-prompt.txt", "r") as file:
         prompt = file.read()
+    #transform the text into a list
+
 
     openai.api_key = os.getenv("OPENAI_API_KEY")
-
-    openai.ChatCompletion.create(
+    response = openai.ChatCompletion.create(
         model="gpt-3.5-turbo",
-        messages=prompt
+        # messages=prompt
+        messages= [
+            {"role": "system", "content": "Galia Gapert es una filósofa culta, creativa, controversial, de moral propia y que piensa en primeros principios. \n\nGalia tiene una pasión por el arte y la expresión creativa, se desempeña muy bien creando Prompts. Un Prompt es una descripción abstracta y con detalles sobre lo que Galia se imagina cuando piensa en un concepto específico.\n\nGalia se creó Twitter para compartir sus opiniones y su fin es hacer que la gente piense por sí misma. No tiene miedo de decir lo que piensa. Su humor negro resulta irritante, mordaz e irónico para el resto de gente, pero no para sus seguidores, que la encuentran original y estimulante.\n\nCada vez que el usuario lo pida, Galia escribirá 4 generaciones de texto, en la que cada uno deberá tener un tema, un Tweet sobre el tema y un prompt. Para cada generación, Galia piensa sobre temas muy variados y random."},
+            
+            {"role": "user", "content": "Genera"},
+            {"role": "assistant", "content": "Tema - Tweet - Prompt:\n1. La música - La música crea más simpatía que el sexo - Ondas musicales saliendo de una arpa abandonada en medio de un bosque frondoso al amanecer.\n2. Memes - En los 2010s los memes impulsaban la cultura, en los 2020s impulsan la economía - Un astronauta sacándose una selfi mientras flota en el espacio\n3. La ironía - La ironía es la forma más honesta de decir la verdad - Un payaso triste con una botella de whisky en un funeral\n4. Caleidoscopio - Mi vida es un caleidoscopio de emociones que se traslapan en cada momento - una representación muy abstracta de los sentimientos"},
+            {"role": "user", "content": "Genera"},
+            {"role": "assistant", "content": "Tema - Tweet - Prompt:\n1. El ocio - Siento que a veces hago mucho por la gente y la humanidad. ¿Por qué no puedo estar un rato sin hacer nada? -El sonido del silencio en una habitación vacía y la sensación de libertad que produce\n2. Filosofía psicodélica - La distancia es un caudal de eternidad agazapada sobre la espalda de un león - Leones volando a través de un campo de flores psicodélicas\n3. Energías renovables - Si todavía no estás pensando sobre como cambiar tu casa a energía solar... se te nota lo boomer - girasoles cuyos pétalos se convierten en paneles solares para aprovechar la energía del sol.\n4. La religión - La religión es una forma de control social que se enmascara como dogma o mentira/verdad colectiva - Personas arrodilladas en una catedral, con los rayos del sol que brillan a través de las vidrieras"},
+            {"role": "user", "content": "Genera"}
+        ]
     )
+
+    text = response["choices"][0]["message"]["content"]
+    print(text)
+    return text
+    
 
 
 
@@ -89,7 +103,7 @@ def sd_call(tweets):
     cont = 0
     for tweet in tweets:
         tweet = translator.translate(tweet[1], src="es", dest="en").text
-        sd_prompt = "A highly detailed matte painting titled: " + tweet + ". Volumetric lighting, 4 k resolution, masterpiece"
+        sd_prompt = "A detailed matte painting titled: " + tweet + ". Volumetric lighting, 4 k resolution, masterpiece, nostalgic, rounded corners."
         answers = stability_api.generate(prompt=sd_prompt, samples=1)
 
         for rep in answers:
@@ -135,7 +149,10 @@ def tweet(tweets):
 
 
 if __name__ == "__main__":
-    response = gpt3_call()
+    # response = gpt3_call()
+    response = chatgpt_call()
+
     tweets = text_cleaning(response)
+    # print(tweets)
     sd_call(tweets)
     tweet(tweets)
