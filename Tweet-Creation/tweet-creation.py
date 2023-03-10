@@ -33,11 +33,10 @@ def gpt3_call():
     print()
     return text
 
-def chatgpt_call():
-    with open("./Tweet-Creation/galia-chat-prompt.txt", "r") as file:
-        prompt = file.read()
-    #transform the text into a list
 
+def chatgpt_call():
+    # with open("./Tweet-Creation/galia-chat-prompt.txt", "r") as file:
+    #     prompt = file.read()
 
     openai.api_key = os.getenv("OPENAI_API_KEY")
     response = openai.ChatCompletion.create(
@@ -58,8 +57,6 @@ def chatgpt_call():
     print(text)
     return text
     
-
-
 
 def text_cleaning(text):
     tweets_starts = []
@@ -153,6 +150,5 @@ if __name__ == "__main__":
     response = chatgpt_call()
 
     tweets = text_cleaning(response)
-    # print(tweets)
     sd_call(tweets)
     tweet(tweets)
